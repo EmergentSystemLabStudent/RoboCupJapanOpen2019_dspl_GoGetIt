@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <!-- YOLO9000:
+  <include file="$(find hsr_launch)/launch/darknet_ros_yolo9000_default.launch" />
+  -->
+
+  <!-- YOLOv2:
+  <include file="$(find hsr_launch)/launch/darknet_ros_yolov2_default.launch" />
+  -->
+
+  <!-- YOLOv3: -->
+  <include file="$(find hsr_launch)/launch/darknet_ros_yolov3_default.launch" />
+
+  <param name="/darknet_ros/subscribers/camera_reading/topic" value="/dummy"/>
+  <param name="/darknet_ros/image_view/enable_opencv" value="false"/>
+  <node name="bounding_box_2d_server" pkg="hsr_common" type="bounding_box_2d_server.py" respawn="false" cwd="node" output="screen" args="--module_name darknet_ros"/>
+  <node name="bounding_box_2d_input" pkg="topic_tools" type="throttle" respawn="false" cwd="node" output="screen" args="messages /hsrb/head_rgbd_sensor/rgb/image_raw 2 /bounding_box_2d_input_throttle"/>
+
+  <!--
+  <node name="bounding_box_2d_monitor" pkg="hsr_common" type="monitor_and_detect_client.py" respawn="false">
+    <!remap from="input" to="/bounding_box_2d_input_throttle"/>
+    <!remap from="output" to="/bounding_box_2d_monitor"/>
+  </node>
+  -->
+  
+  <node name="bounding_box_2d_image_view" pkg="image_view" type="image_view" respawn="false">
+    <remap from="image" to="/bounding_box_2d_monitor"/>
+  </node>
+</launch>

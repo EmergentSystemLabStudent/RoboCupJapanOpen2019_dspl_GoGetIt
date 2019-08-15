@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <node name="cv_detect_object_service" pkg="detect_object" type="detect.py" respawn="false" cwd="node" output="screen" args="--gpu 0 --model faster-rcnn-vgg16-voc07.npz --label_file faster-rcnn-vgg16-voc07.json"/>
+  <node name="cv_detect_object_input" pkg="topic_tools" type="throttle" respawn="false" cwd="node" output="screen" args="messages /hsrb/head_rgbd_sensor/rgb/image_raw 2 /cv_detect_object_input_throttle"/>
+  <node name="cv_detect_object_monitor" pkg="detect_object" type="monitor_and_detect.py" respawn="false">
+    <remap from="input" to="/cv_detect_object_input_throttle"/>
+    <remap from="output" to="/cv_detect_object_monitor"/>
+  </node>
+  <node name="cv_detect_object_image_view" pkg="image_view" type="image_view" respawn="false">
+    <remap from="image" to="/cv_detect_object_monitor"/>
+  </node>
+</launch>

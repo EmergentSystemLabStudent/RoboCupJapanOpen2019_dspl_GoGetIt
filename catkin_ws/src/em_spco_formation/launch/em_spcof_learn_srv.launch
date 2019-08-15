@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="trial_name" default="default" />
+  <arg name="gamma" default="10.0" />
+
+  <node name="em_spcof_learn" pkg="em_spco_formation" type="em_spcof_learn.py" output="screen" cwd="node" >
+    <param name="trial_name" value="$(arg trial_name)" />
+    <param name="gamma" value="$(arg gamma)" />
+  </node>
+
+  <node name="em_spcof_rviz" pkg="em_spco_formation" type="em_spcof_rviz.py" output="screen" cwd="node" >
+    <param name="trial_name" value="$(arg trial_name)" />
+  </node>
+
+</launch>

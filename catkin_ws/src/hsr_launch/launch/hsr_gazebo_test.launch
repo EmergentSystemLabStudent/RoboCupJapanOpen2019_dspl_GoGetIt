@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+  <arg name="map" default="$(find hsr_launch)/config/gazebo/map/hsr_tc123/map.yaml"/>
+  <arg name="world_name" default="$(find nrp_gazebo_worlds)/worlds/hsr_tc123.world" />
+  <arg name="rviz_name" default="$(find hsr_launch)/config/rviz/hsr_moveit.rviz" />
+  <arg name="debug" default="false"/>
+  <arg name="gui" default="false"/>
+  <arg name="rviz" default="true"/>
+  <arg name="gazebo_visualization" default="false"/>
+  <arg name="use_manipulation" default="true"/>
+  <arg name="use_navigation" default="true"/>
+  <arg name="use_perception" default="true"/>
+  <arg name="use_task" default="true"/>
+  <arg name="use_teleop" default="true"/>
+  <arg name="use_web" default="true"/>
+  <arg name="use_laser_odom" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="fast_physics" default="true"/>
+
+  <!-- default -->
+  <!--<include file="$(find hsrb_gazebo_launch)/launch/hsrb_mock_home_world.launch" pass_all_args="true"/>-->
+  <!-- castom -->
+  <include file="$(find hsr_launch)/config/gazebo/launch/hsr_gazebo_start_simulator.launch" pass_all_args="true"/>
+
+  <arg name="use_moveit" default="true"/>
+  <arg name="use_gui" default="false"/>
+  <group if="$(arg use_moveit)">
+    <include file="$(find hsrb_moveit_config)/launch/demo_with_controller.launch" >
+    </include>
+  </group>
+
+  <arg name="view_gazebo_models" default="true"/>
+
+  <group if="$(arg view_gazebo_models)">
+    <!-- gazebo2rviz -->
+    <include file="$(find gazebo2rviz)/launch/gazebo2rviz.launch" />
+      <arg name="marker_frequency" default="2" />
+      <arg name="marker_collision" default="true" />
+  </group>
+</launch>
+

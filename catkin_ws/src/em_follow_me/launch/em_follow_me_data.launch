@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <node name="em_follow_me_forDataset" pkg="em_follow_me" type="em_follow_me_forDataset.py" output="screen" cwd="node" />
+  
+</launch>

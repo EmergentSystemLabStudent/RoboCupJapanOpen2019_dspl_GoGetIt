@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>em_follow_me</name>
+  <version>1.0.0</version>
+  <description>The 'em_follow_me' package provides real-time tracking of a human with using a particle filter and random forest.</description>
+
+  <maintainer email="yuki.katsumata@em.ci.ritsumei.ac.jp">Yuki Katsumata</maintainer>
+  <license>MIT</license>
+  <url type="website">http://em.ci.ritsumei.ac.jp/</url>
+  <author email="yuki.katsumata@em.ci.ritsumei.ac.jp">Yuki Katsumata</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>message_generation</depend>
+  <depend>message_runtime</depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>actionlib_msgs</depend>
+</package>

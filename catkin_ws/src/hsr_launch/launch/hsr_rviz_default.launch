@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+  <!-- Set the Rviz file name. Change the 'default' value only. -->
+  <arg name="rviz_filename" default="hsr_demo.rviz"/> <!--wrs_prc_final, hsr_moveit -->
+  <arg name="gazebo_world_name" default="hsr_tc123.world"/><!--hsr_tc123, wrs_fcsc-->
+  <arg name="gazebo2rviz" default="false"/>
+  <arg name="init_position" default="false"/>
+
+  <!-- Rviz -->
+  <node name="$(anon rviz)" pkg="rviz" type="rviz" args="-d $(find hsr_launch)/config/rviz/$(arg rviz_filename)"/>
+
+  <!-- Set the start position in Rviz -->
+  <group if="$(arg init_position)">
+    <node name="hsr_init_pose" pkg="hsr_launch" type="hsr_init_position.py" output="screen"/>
+  </group>
+
+
+  <!-- gazebo2rviz -->
+  <group if="$(arg gazebo2rviz)">
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="world_name" value="$(find nrp_gazebo_worlds)/worlds/$(arg gazebo_world_name)"/>
+      <arg name="gui" value="false"/>
+    </include>
+    <include file="$(find gazebo2rviz)/launch/gazebo2rviz.launch" >
+      <arg name="marker_frequency" default="2" />
+      <arg name="marker_collision" default="true" />
+    </include>
+  </group>
+</launch>

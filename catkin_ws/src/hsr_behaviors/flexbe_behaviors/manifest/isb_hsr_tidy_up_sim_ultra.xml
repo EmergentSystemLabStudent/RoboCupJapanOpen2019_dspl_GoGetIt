@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="isb_hsr_tidy_up_sim_ultra">
+
+	<executable package_path="flexbe_behaviors.isb_hsr_tidy_up_sim_ultra_sm" class="isb_hsr_tidy_up_sim_ultraSM" />
+	<tagstring>hsr</tagstring>
+	<author>shota isobe</author>
+	<date>Wed Oct 10 2018</date>
+	<description>
+		isb_hsr_tidy_up_sim_ultra
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

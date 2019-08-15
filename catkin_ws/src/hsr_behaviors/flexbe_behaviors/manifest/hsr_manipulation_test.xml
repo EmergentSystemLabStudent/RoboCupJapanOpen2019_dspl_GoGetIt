@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="hsr_manipulation_test">
+
+	<executable package_path="flexbe_behaviors.hsr_manipulation_test_sm" class="hsr_manipulation_testSM" />
+	<tagstring>hsr</tagstring>
+	<author>tfukui</author>
+	<date>Fri Jun 21 2019</date>
+	<description>
+		hsr_manipulation_test
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

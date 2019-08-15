@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <include file="$(find hsr_launch)/config/gazebo/launch/nrp_spawn_urdf.launch">
+        <arg name="x" value="-1.3" />
+        <arg name="y" value="0.8" />
+        <arg name="z" value="1.0" />
+        <arg name="urdf_robot_file" value="$(find hsr_launch)/config/gazebo/urdf/3rd_plastic_bottle_nolabel.urdf" />
+        <arg name="robot_name" value="3rd_plastic_bottle_nolabel" />
+    </include>
+</launch>

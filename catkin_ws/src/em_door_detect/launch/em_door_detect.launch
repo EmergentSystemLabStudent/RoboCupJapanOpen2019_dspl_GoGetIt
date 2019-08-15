@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="door_distance" default="1.0" />
+    <arg name="door_width" default="0.5" />
+    <node name="em_door_detect_srv" pkg="em_door_detect" type="em_door_detect_srv.py" output="screen" >
+        <param name="door_distance" value="$(arg door_distance)"/>
+        <param name="door_width" value="$(arg door_width)"/>
+    </node>
+</launch>

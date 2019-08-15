@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="Test_ask_place">
+
+	<executable package_path="flexbe_behaviors.test_ask_place_sm" class="Test_ask_placeSM" />
+	<tagstring></tagstring>
+	<author>HitoshiNakamura</author>
+	<date>Wed Jul 10 2019</date>
+	<description>
+		Test_ask_place
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

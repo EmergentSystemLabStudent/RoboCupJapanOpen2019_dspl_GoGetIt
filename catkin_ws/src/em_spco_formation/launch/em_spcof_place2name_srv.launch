@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="trial_name" default="default" />
+
+  <node name="em_spcof_place2name" pkg="em_spco_formation" type="em_spcof_place2name.py" output="screen" cwd="node" >
+    <param name="trial_name" value="$(arg trial_name)" />
+  </node>
+
+</launch>

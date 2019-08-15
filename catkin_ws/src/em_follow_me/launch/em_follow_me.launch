@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="input_frame_per_second" default="200"/>
+    <node name="em_follow_me_action" pkg="em_follow_me" type="em_follow_me_action.py" output="screen" cwd="node" >
+        <param name="stop_distance" value="0.7" />
+        <param name="back_distance" value="0.5" />
+        <param name="max_speed" value="0.15" />
+    </node>
+    <!--node name="em_trace_person_input" pkg="topic_tools" type="throttle" respawn="true" cwd="node" output="screen" args="messages /hsrb/base_scan $(arg input_frame_per_second) /hsrb/base_scan_for_em_follow_me"/-->
+    <node name="em_trace_person" pkg="em_follow_me" type="em_trace_person.py" output="screen" cwd="node" >
+        <!-- topic name -->
+        <param name="scan_topic_name" value="/hsrb/base_scan" />
+        <!-- param for clustering -->
+        <param name="clustering_iteration" value="70" />
+        <param name="cluster_min_size" value="10" />
+        <param name="cluster_min_dist" value="0.06" />
+        <!-- param for random forest -->
+        <param name="human_proba_threshold" value="0.5" />
+        <!-- param for particle filter -->
+        <param name="particle_num" value="120" />
+        <param name="particle_rad_param" value="0.08" />
+        <param name="particle_raw_param" value="0.08" />
+        <!-- param for smoothing -->
+        <param name="smoothing_len" value="10" />
+        <!-- debag -->
+        <param name="output_rviz" value="true" />
+    </node>
+</launch>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>hsr_launch</name>
+  <version>1.0.0</version>
+  <description>The 'hsr_launch' package coordinates the robot tasks and behaviors across all other packages using shared launch files.</description>
+
+  <maintainer email="lotfi.elhafi@gmail.com">Lotfi El Hafi</maintainer>
+  <license>MIT</license>
+  <url type="website">http://www.ritsumei.ac.jp/research/r-giro/eng/philosophy/</url>
+  <author email="lotfi.elhafi@gmail.com">Lotfi El Hafi</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+</package>

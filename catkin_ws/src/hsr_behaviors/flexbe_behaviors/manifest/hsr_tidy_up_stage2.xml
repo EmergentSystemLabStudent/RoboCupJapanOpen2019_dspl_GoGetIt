@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="hsr_tidy_up_stage2">
+
+	<executable package_path="flexbe_behaviors.hsr_tidy_up_stage2_sm" class="hsr_tidy_up_stage2SM" />
+	<tagstring>hsr</tagstring>
+	<author>tabuchi</author>
+	<date>Tue Oct 02 2018</date>
+	<description>
+		tidy up stage2
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

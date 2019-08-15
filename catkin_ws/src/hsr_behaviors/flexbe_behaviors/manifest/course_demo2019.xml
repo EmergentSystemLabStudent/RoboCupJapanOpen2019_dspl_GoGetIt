@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="course_demo2019">
+
+	<executable package_path="flexbe_behaviors.course_demo2019_sm" class="course_demo2019SM" />
+	<tagstring></tagstring>
+	<author>Hitoshi Nakamura</author>
+	<date>Sat Jun 15 2019</date>
+	<description>
+		course_demo2019
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

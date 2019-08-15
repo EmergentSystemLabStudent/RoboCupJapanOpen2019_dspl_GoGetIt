@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <node name="em_follow_me_srv"  pkg="em_follow_me" type="em_follow_me_srv.py" output="screen" cwd="node" />
+  <node name="em_follow_me_test" pkg="em_follow_me" type="em_test.py"         output="screen" cwd="node" />
+
+</launch>

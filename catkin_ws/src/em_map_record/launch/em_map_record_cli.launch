@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="task_name" default="default" />
+
+    <node name="em_map_record_cli"  pkg="em_map_record" type="em_map_record_cli.py"  output="screen" cwd="node" >
+        <param name="task_name" value="$(arg task_name)" />
+    </node>
+
+</launch>

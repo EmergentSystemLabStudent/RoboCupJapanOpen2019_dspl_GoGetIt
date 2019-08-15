@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <node name="em_follow_me_action" pkg="em_follow_me" type="em_follow_me_action.py" output="screen" cwd="node" >
+        <param name="stop_distance" value="0.8" />
+        <param name="back_distance" value="0.5" />
+        <param name="max_speed" value="0.25" />
+    </node>
+
+</launch>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>em_door_detect</name>
+  <version>1.0.0</version>
+  <description>The 'em_door_detect' package determines whether a door is open or not.</description>
+
+  <maintainer email="yoshiki.tabuchi@em.ci.ritsumei.ac.jp">Yoshiki Tabuchi</maintainer>
+  <license>MIT</license>
+  <url type="website">http://em.ci.ritsumei.ac.jp/</url>
+  <author email="yoshiki.tabuchi@em.ci.ritsumei.ac.jp">Yoshiki Tabuchi</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>rospy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>message_generation</depend>
+  <depend>message_runtime</depend>
+</package>

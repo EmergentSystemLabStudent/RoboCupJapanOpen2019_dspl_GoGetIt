@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="run flexbe behavior automatically">
+
+	<executable package_path="flexbe_behaviors.run_flexbe_behavior_automatically_sm" class="runflexbebehaviorautomaticallySM" />
+	<tagstring>hsr</tagstring>
+	<author>shota isobe</author>
+	<date>Tue Nov 13 2018</date>
+	<description>
+		run flexbe behavior automatically
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

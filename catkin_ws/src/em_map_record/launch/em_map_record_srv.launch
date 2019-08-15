@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="new_data" default="false" />
+    <arg name="task_name" default="default" />
+    <arg name="image_topic" default="/hsrb/head_rgbd_sensor/rgb/image_raw" />
+
+    <node name="em_map_record_srv" pkg="em_map_record" type="em_map_record_srv.py" output="screen" cwd="node" >
+        <param name="new_data" value="$(arg new_data)" />
+        <param name="task_name" value="$(arg task_name)" />
+    </node>
+
+    <node name="em_map_image" pkg="em_map_record" type="em_map_image.py" output="screen" cwd="node" >
+        <param name="task_name" value="$(arg task_name)" />
+        <param name="image_topic" value="$(arg image_topic)" />
+    </node>
+
+    <node name="em_map_pose"  pkg="em_map_record" type="em_map_pose.py"  output="screen" cwd="node" >
+        <param name="task_name" value="$(arg task_name)" />
+    </node>
+
+    <group if="$(arg new_data)">
+        <!-- SLAM -->
+        <include file="$(find em_map_record)/launch/em_online_slam.launch" />
+        <!-- Rviz -->
+        <node name="$(anon rviz)" pkg="rviz" type="rviz" args="-d $(find em_map_record)/launch/em_online_slam.rviz"/>
+    </group>
+
+    <group unless="$(arg new_data)">
+        <!-- Rviz -->
+        <node name="$(anon rviz)" pkg="rviz" type="rviz" args="-d $(find hsr_launch)/config/rviz/hsr_demo.rviz"/>
+    </group>
+
+
+</launch>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <node name="em_depth_threshold_image" pkg="em_follow_me" type="em_depth_threshold_image.py" output="screen" cwd="node" >
+        <param name="depth_threshold" value="3000" />
+    </node>
+<!-- 
+    <include file="$(find hsr_launch)/launch/darknet_ros_yolov3_default.launch" />
+    <param name="/darknet_ros/subscribers/camera_reading/topic" value="/depth_threshold_image/image" />
+    <param name="/darknet_ros/image_view/enable_opencv" value="false" />
+ -->
+</launch>

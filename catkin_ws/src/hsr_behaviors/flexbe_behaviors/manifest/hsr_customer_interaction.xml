@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="hsr_customer_interaction">
+
+	<executable package_path="flexbe_behaviors.hsr_customer_interaction_sm" class="hsr_customer_interactionSM" />
+	<tagstring>hsr</tagstring>
+	<author>tabuchi</author>
+	<date>Wed Oct 10 2018</date>
+	<description>
+		Customer Interaction state
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

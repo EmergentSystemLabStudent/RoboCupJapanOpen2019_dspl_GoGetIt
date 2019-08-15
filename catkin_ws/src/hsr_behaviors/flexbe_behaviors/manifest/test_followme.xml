@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="test_followme">
+
+	<executable package_path="flexbe_behaviors.test_followme_sm" class="test_followmeSM" />
+	<tagstring></tagstring>
+	<author>HItoshi Nakamura</author>
+	<date>Thu Aug 01 2019</date>
+	<description>
+		test_followme
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <node name="em_follow_me_hsrnav" pkg="em_follow_me" type="em_follow_me_hsrnav.py" output="screen" cwd="node" >
+        <!-- <param name="use_color" value="false" /> -->
+        <!-- <param name="output_flag" value="true" /> -->
+        <!-- <param name="heightThreshold" value="0.05" /> -->
+    </node>
+
+</launch>

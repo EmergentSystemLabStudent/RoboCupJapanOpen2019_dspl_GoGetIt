@@ -1,0 +1,5 @@
+string before
+string after
+geometry_msgs/Pose before_pose
+---
+geometry_msgs/PoseStamped after_pose

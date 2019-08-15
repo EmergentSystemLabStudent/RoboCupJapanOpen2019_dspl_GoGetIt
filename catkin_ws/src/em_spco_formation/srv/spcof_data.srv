@@ -1,0 +1,4 @@
+string sentence
+---
+bool finish
+int32 data_num

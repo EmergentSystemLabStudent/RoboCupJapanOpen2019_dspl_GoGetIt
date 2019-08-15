@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+  <!-- Simulation type: unattended or not. -->
+  <arg name="unattended" default="false"/>
+
+  <!-- World parameters: 'hsr_tc123', 'wrs_fcsc', etc. -->
+  <!-- Tidy Up Stage 1 -->
+  <arg name="map" default="$(find hsr_launch)/config/gazebo/map/hsr_tc123/map.yaml"/>
+  <arg name="world_name" default="$(find nrp_gazebo_worlds)/worlds/hsr_tc123.world"/>
+  <!--hsr_tidy_stage1_noitems.world-->
+
+  <!-- Tidy Up Stage 2 -->
+  <!-- <arg name="map" default="$(find hsr_launch)/config/gazebo/map/hsr_tidy_stage2/map.yaml"/>
+  <arg name="world_name" default="$(find nrp_gazebo_worlds)/worlds/hsr_tidy_stage2_ex2-1.world"/> -->
+
+  <!-- Default -->
+  <!--<arg name="map" default="$(find hsr_launch)/config/gazebo/map/hsr_tc123/map.yaml"/>
+  <arg name="world_name" default="$(find nrp_gazebo_worlds)/worlds/hsr_tc123_noitems_fast.world"/>-->
+
+  <!-- Additional common parameters. -->
+  <arg name="debug" default="false"/>
+  <arg name="recording" value="false"/>
+  <arg name="rviz" default="false"/>
+  <arg name="gazebo_visualization" default="false"/>
+  <arg name="use_manipulation" default="true"/>
+  <arg name="use_navigation" default="true"/>
+  <arg name="use_perception" default="true"/>
+  <arg name="use_task" default="true"/>
+  <arg name="use_laser_odom" default="true"/>
+  <arg name="fast_physics" default="true"/>
+  <arg name="paused" default="true"/>
+
+  <!-- Attended simulation case. -->
+  <group unless="$(arg unattended)">
+    <arg name="gui" default="true"/>
+    <arg name="use_teleop" default="false"/>
+    <arg name="use_web" default="false"/>
+
+    <!-- Gazebo launch file. -->
+    <include file="$(find hsr_launch)/config/gazebo/launch/hsrb_gazebo_start_simulator.launch" pass_all_args="true"/>
+    <!-- Toyota default: <include file="$(find hsrb_gazebo_launch)/launch/hsrb_mock_home_world.launch" pass_all_args="true"/> -->
+  </group>
+
+  <!-- Unattended simulation case. -->
+  <group if="$(arg unattended)">
+    <arg name="behavior_name" default="run flexbe behavior automatically"/>
+    <arg name="gui" default="false"/>
+    <arg name="use_teleop" default="false"/>
+    <arg name="use_web" default="false"/>
+
+    <!-- Gazebo launch file. -->
+    <include file="$(find hsr_launch)/config/gazebo/launch/hsrb_gazebo_start_simulator.launch" pass_all_args="true"/>
+    <!-- Toyota default: <include file="$(find hsrb_gazebo_launch)/launch/hsrb_mock_home_world.launch" pass_all_args="true"/> -->
+
+    <!-- FlexBE launch file. -->
+    <!-- http://wiki.ros.org/flexbe/Tutorials/Running%20Behaviors%20Without%20Operator -->
+    <include file="$(find flexbe_onboard)/launch/behavior_onboard.launch"/>
+    <node name="behavior_launcher" pkg="flexbe_widget" type="be_launcher" output="screen" args="-b '$(arg behavior_name)'"/>
+  </group>
+
+  <!-- 'gazebo2rviz' launch file. -->
+  <arg name="gazebo2rviz" default="false"/>
+  <group if="$(arg gazebo2rviz)">
+    <include file="$(find gazebo2rviz)/launch/gazebo2rviz.launch"/>
+      <arg name="marker_frequency" default="2"/>
+      <arg name="marker_collision" default="true"/>
+  </group>
+</launch>

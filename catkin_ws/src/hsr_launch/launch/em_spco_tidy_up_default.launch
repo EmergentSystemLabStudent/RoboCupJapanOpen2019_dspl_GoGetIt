@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <arg name="trial_name" default="default" />
+  <arg name="yolo_yaml" default="yolov3.yaml" />
+
+  <include file="$(find em_spco_tidy_up)/launch/em_spacoty_srv.launch">
+    <arg name="trial_name" value="$(arg trial_name)"/>
+    <arg name="yolo_yaml" value="$(arg yolo_yaml)"/>
+  </include>
+</launch>

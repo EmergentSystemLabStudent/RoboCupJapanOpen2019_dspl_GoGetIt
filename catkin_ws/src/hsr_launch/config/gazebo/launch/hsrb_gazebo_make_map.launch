@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- World parameters: 'hsr_tc123', 'wrs_fcsc', etc. -->
+  <arg name="gazebo_world_file" default="hsr_tidy_stage1_gt.world"/>
+
+  <!-- Additional parameters. -->
+  <arg name="gazebo2rviz" default="false"/>
+  <arg name="rviz" default="true"/>
+  <include file="$(find hsr_launch)/config/gazebo/launch/hsrb_gazebo_common.xml" >
+    <arg name="map" value="$(find tmc_potential_maps)/maps/white_space/map.yaml"/>
+    <arg name="world_name" value="$(find nrp_gazebo_worlds)/worlds/$(arg gazebo_world_file)"/>
+    <arg name="rviz_name" value="$(find hsr_launch)/config/rviz/hsr_demo.rviz"/>
+    <arg name="robot_pos" value="-x 0 -y -0 -z 0 -Y 0"/>
+    <!-- Toyota default: <arg name="robot_pos" value="-x 5.0 -y -4.0 -z 0 -Y 0"/> -->
+    <arg name="use_laser_odom" value="false"/>
+    <arg name="gui" default="true"/>
+    <arg name="paused" default="true"/>
+    <arg name="rviz" default="$(arg rviz)"/>
+  </include>
+
+  <!-- 'gazebo2rviz' launch file. -->
+  <group if="$(arg gazebo2rviz)">
+    <include file="$(find gazebo2rviz)/launch/gazebo2rviz.launch"/>
+      <arg name="marker_frequency" default="2"/>
+      <arg name="marker_collision" default="true"/>
+  </group>
+</launch>

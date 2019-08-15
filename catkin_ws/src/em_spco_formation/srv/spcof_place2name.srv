@@ -1,0 +1,4 @@
+geometry_msgs/Point point
+---
+string place_name
+bool done

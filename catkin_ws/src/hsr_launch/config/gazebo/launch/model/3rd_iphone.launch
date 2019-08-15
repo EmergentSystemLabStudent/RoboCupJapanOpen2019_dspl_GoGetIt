@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <include file="$(find hsr_launch)/config/gazebo/launch/nrp_spawn_urdf.launch">
+        <arg name="x" value="0.0" />
+        <arg name="y" value="-1.0" />
+        <arg name="z" value="0.5" />
+        <arg name="urdf_robot_file" value="$(find hsr_launch)/config/gazebo/urdf/3rd_iphone.urdf" />
+        <arg name="robot_name" value="3rd_iphone" />
+    </include>
+</launch>

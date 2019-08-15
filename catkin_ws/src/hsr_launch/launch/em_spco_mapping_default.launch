@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <include file="$(find em_spco_mapping)/launch/em_spcom_learn.launch"/>
+</launch>

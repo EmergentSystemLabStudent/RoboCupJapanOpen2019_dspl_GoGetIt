@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <!-- Console launch prefix. -->
+  <arg name="launch_prefix" default=""/>
+
+  <!-- Config and weights folder. -->
+  <arg name="yolo_weights_path" default="$(find hsr_launch)/config/darknet_ros/weights"/>
+  <arg name="yolo_config_path" default="$(find hsr_launch)/config/darknet_ros/cfg"/>
+
+  <!-- Load parameters. -->
+  <rosparam command="load" ns="darknet_ros" file="$(find hsr_launch)/config/darknet_ros/ros.yaml"/>
+  <!-- <rosparam command="load" ns="darknet_ros" file="$(find hsr_launch)/config/darknet_ros/yolov2.yaml"/> -->
+  <!-- <rosparam command="load" ns="darknet_ros" file="$(find hsr_launch)/config/darknet_ros/yolo9000.yaml"/> -->
+  <rosparam command="load" ns="darknet_ros" file="$(find hsr_launch)/config/darknet_ros/yolov3.yaml"/>
+
+  <!-- Start Darknet and ROS wrapper. -->
+  <node pkg="darknet_ros" type="darknet_ros" name="darknet_ros" launch-prefix="$(arg launch_prefix)">
+    <param name="weights_path" value="$(arg yolo_weights_path)"/>
+    <param name="config_path" value="$(arg yolo_config_path)"/>
+  </node>
+
+  <!--
+  <node name="republish" type="republish" pkg="image_transport" args="compressed in:=/hsrb/head_rgbd_sensor/rgb/image_color/compressed raw out:=/hsrb/head_rgbd_sensor/rgb/image_color/decompressed" output="screen">
+    <param name="use_sim_time" value="true" />
+  </node>
+  -->
+
+</launch>

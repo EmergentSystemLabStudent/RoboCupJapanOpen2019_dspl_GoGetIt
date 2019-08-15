@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <!-- Default: -->
+  <node name="cv_detect_object_init" pkg="detect_object" type="prepare.py" respawn="false" cwd="node" output="screen"/>
+
+  <!-- Change 'args' with single "-" to double "-" when removing HTML comments. -->
+
+  <!-- YOLO VOC to COCO:
+  <node name="cv_detect_object_init_yolo_coco" pkg="detect_object" type="prepare_model_for_yolo_coco.sh" respawn="false" cwd="node" output="screen" args="libdarknet_ros_lib.so"/>
+  -->
+
+  <!-- YOLOv2 VOC:
+  <node name="cv_detect_object_init_yolo" pkg="detect_object" type="prepare.py" respawn="false" cwd="node" output="screen" args="-model yolo_v3 -pretrained_model voc0712 -output_model yolo-v3-voc0712.npz -output_json yolo-v3-voc0712.json"/>
+  -->
+
+  <!-- YOLOv3 VOC:
+  <node name="cv_detect_object_init_yolo" pkg="detect_object" type="prepare.py" respawn="false" cwd="node" output="screen" args="-model yolo_v2 -pretrained_model voc0712 -output_model yolo-v2-voc0712.npz -output_json yolo-v2-voc0712.json"/>
+  -->
+</launch>

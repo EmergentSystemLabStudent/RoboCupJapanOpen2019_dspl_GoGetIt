@@ -1,0 +1,99 @@
+#!/usr/bin/env python
+import argparse
+import json
+import sys
+
+import chainercv
+from chainercv.datasets import voc_bbox_label_names
+from chainer_npz_with_structure import make_serializable_object
+from chainer_npz_with_structure import save_npz_with_structure
+
+parser = argparse.ArgumentParser(
+        description="Prepare a NPZ file and a JSON file for 'detect.py'.",
+        epilog='''
+EXAMPLE:
+python prepare.py --model faster_rcnn --output_model faster-rcnn-vgg16-voc07.npz --output_json faster-rcnn-vgg16-voc07.json
+python prepare.py --model yolo_v2 --output_model yolov2.npz --output_json yolov2.json --pretrained_model voc0712
+'''
+)
+parser.add_argument('--model', choices=('faster_rcnn', 'yolo_v2', 'yolo_v3'),
+                    default='faster_rcnn')
+parser.add_argument('--output_model', default='faster-rcnn-vgg16-voc07.npz')
+parser.add_argument('--output_json', default='faster-rcnn-vgg16-voc07.json')
+parser.add_argument('--pretrained_model', default='voc07',
+                    help = 'the pretrained model. See http://chainercv.readthedocs.io/en/stable/reference/links/faster_rcnn.html '
+)
+
+parsed_args = sys.argv
+try:
+    import rospy
+    parsed_args = rospy.myargv(argv=sys.argv)
+except ImportError:
+    pass
+
+args = parser.parse_args(parsed_args[1:])
+
+print("Preparing the pretrained model...")
+sys.stdout.flush()
+if args.model == 'faster_rcnn':
+    model = make_serializable_object(
+        chainercv.links.FasterRCNNVGG16,
+        constructor_args = {
+            'n_fg_class': len(voc_bbox_label_names),
+            'pretrained_model': args.pretrained_model,
+        },
+        template_args = {
+            # Do not retrieve the pre-trained model again on generating a
+            # template object for loading weights in a file.
+            'n_fg_class': len(voc_bbox_label_names),
+            'pretrained_model': None,
+        }
+    )
+elif args.model == 'yolo_v2':
+    model = make_serializable_object(
+        chainercv.links.YOLOv2,
+        constructor_args = {
+            'n_fg_class': len(voc_bbox_label_names),
+            'pretrained_model': args.pretrained_model,
+        },
+        template_args = {
+            # Do not retrieve the pre-trained model again on generating a
+            # template object for loading weights in a file.
+            'n_fg_class': len(voc_bbox_label_names),
+            'pretrained_model': None,
+        }
+    )
+elif args.model == 'yolo_v3':
+    model = make_serializable_object(
+        chainercv.links.YOLOv3,
+        constructor_args = {
+            'n_fg_class': len(voc_bbox_label_names),
+            'pretrained_model': args.pretrained_model,
+        },
+        template_args = {
+            # Do not retrieve the pre-trained model again on generating a
+            # template object for loading weights in a file.
+            'n_fg_class': len(voc_bbox_label_names),
+            'pretrained_model': None,
+        }
+    )
+
+#
+print("Finished.")
+sys.stdout.flush()
+
+print("Saving the pretrained model as '%s', which can be loaded by 'chainer_npz_with_structure.load_npz_with_structure()'..." % (args.output_model,))
+save_npz_with_structure(args.output_model, model)
+print("Finished.")
+sys.stdout.flush()
+
+print("Saving the label file as '%s'." % (args.output_json,))
+d = dict()
+for n, name in enumerate(voc_bbox_label_names):
+    d[n] = name
+
+with open(args.output_json, 'w') as fp:
+    json.dump(d, fp, indent=4)
+
+print("Finished.")
+sys.stdout.flush()

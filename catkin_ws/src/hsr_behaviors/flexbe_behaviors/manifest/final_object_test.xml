@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="Final_object_test">
+
+	<executable package_path="flexbe_behaviors.final_object_test_sm" class="Final_object_testSM" />
+	<tagstring></tagstring>
+	<author>Hitoshi Nakamura</author>
+	<date>Sun Aug 11 2019</date>
+	<description>
+		Final_object_test
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

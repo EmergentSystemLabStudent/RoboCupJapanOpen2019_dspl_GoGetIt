@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="use_rtabmap" default="false"/>
+  <arg name="pause_rtabmap" default="true"/>
+  <arg name="use_octomap_static" default="false"/>
+  <arg name="use_octomap_dynamic" default="false"/>
+  <arg name="use_octomap_static_only_ps" default="false"/>
+
+  <!-- RTABmap -->
+  <group if="$(arg use_rtabmap)">
+
+    <arg name="database_path" default="~/.ros/rtabmap.db" />
+    <!-- <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="delete_db_on_start"> -->
+    <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen">
+      <param name="database_path" type="string" value="$(arg database_path)" />
+      <param name="frame_id" type="string" value="base_footprint" /> <!--default: /map, head_rgbd_sensor_rgb_frame, base_footprint-->
+      <param name="odom_frame_id" type="string" value="/hsrb/base_pose" /> <!--memo: /hsrb/base_pose(sim), robot:/global_storage/keyframe, memo:/odometry/frameinfo,/local_storage/keyframe-->
+      <param name="subscribe_depth" type="bool" value="true" />
+      <param name="subscribe_scan" type="bool" value="false" />
+
+      <remap from="rgb/image" to="/hsrb/head_rgbd_sensor/rgb/image_raw" /> <!--memo: image_raw, image_rect_color-->
+      <remap from="depth/image" to="/hsrb/head_rgbd_sensor/depth_registered/image_raw" /> <!--memo:image_raw, image_rect_raw-->
+      <!--<remap from="scan" to="/hsrb/base_scan" />-->
+      <remap from="rgb/camera_info" to="/hsrb/head_rgbd_sensor/rgb/camera_info" />
+      <remap from="grid_map" to="/map" />
+
+      <param name="queue_size" type="int" value="20"/>
+      <param name="RGBD/LocalLoopDetectionSpace" type="string" value="true"/>
+      <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/>
+      <param name="Kp/MaxDepth" type="string" value="10.0"/>
+      <!-- <param name="LccIcp/Type" type="string" value="2"/> -->
+      <!-- <param name="LccIcp2/CorrespondenceRatio" type="string" value="0.3"/> -->
+      <!-- <param name="LccBow/MinInliers" type="string" value="5"/> -->
+      <!-- <param name="LccBow/InlierDistance" type="string" value="0.1"/> -->
+      <param name="RGBD/AngularUpdate" type="string" value="0.1"/>
+      <param name="RGBD/LinearUpdate" type="string" value="0.1"/>
+      <param name="Rtabmap/TimeThr" type="string" value="700"/>
+      <param name="Mem/RehearsalSimilarity" type="string" value="0.30"/>
+    </node>
+
+  </group>
+
+  <!-- Octomap static -->
+  <group if="$(arg use_octomap_static)">
+
+    <node pkg="tf" type="static_transform_publisher" name="map_world_broadcaster_static" args="0 0 0 0 0 0 world /map 100" />
+    <!-- <node pkg="tf" type="static_transform_publisher" name="map_to_camera_link" args="0 0 0.85 0 0 0 1 map camera_link 100" /> -->
+    <node name="octomap_server_static" pkg="octomap_server" type="octomap_server_node">
+      <remap from="cloud_in" to="/octomap_occupied_space" /><!--/octomap_occupied_space, cloud_map-->
+      <remap from="octomap_full" to="/octomap_full_static"/>
+      <param name="frame_id" type="string" value="/map" />
+      <param name="resolution" value="0.04" /> <!--default: 0.05 [m]-->
+      <param name="base_frame_id" value="base_footprint" />
+      <param name="height_map" value="true" />
+      <param name="sensor_model/max_range" value="7.0" />
+      <param name="sensor_model/hit" value="0.7" />
+      <param name="sensor_model/miss" value="0.4" /> <!--default: 0.4-->
+      <param name="sensor_model/min" value="0.12" />
+      <param name="sensor_model/max" value="0.97" />
+      <param name="latch" value="false" />
+      <param name="filter_ground" value="true" />
+      <param name="ground_filter/distance" value="0.04" />
+      <param name="ground_filter/angle" value="0.02" /> <!--default: 0.15-->
+      <param name="ground_filter/plane_distance" value="0.07" />
+      <param name="pointcloud_min_z" value="0.0" />
+      <param name="pointcloud_max_z" value="2.0" />
+      <param name="occupancy_min_z" value="0.0" />
+      <param name="occupancy_max_z" value="2.0" />
+    </node>
+
+    <group unless="$(arg use_octomap_dynamic)">
+      <group unless="$(arg use_octomap_static_only_ps)">
+        <!-- Publish to Planning Scene -->
+        <node name="planning_scene_octo_static" pkg="hsr_launch" type="hsr_planningscene_octomap_static.py" output="screen" respawn="true"/>
+      </group>
+    </group>
+
+  </group>
+
+  <group if="$(arg use_octomap_static_only_ps)">
+    <node name="planning_scene_octo_static_only_ps" pkg="hsr_launch" type="hsr_planningscene_octomap_static_only_ps.py" output="screen" respawn="true"/>
+  </group>
+
+  <!-- Octomap dynamic -->
+  <group if="$(arg use_octomap_dynamic)">
+
+    <node pkg="tf" type="static_transform_publisher" name="map_world_broadcaster_dynamic" args="0 0 0 0 0 0 world /map 100" />
+
+    <node name="octomap_server_dynamic" pkg="octomap_server" type="octomap_server_node">
+      <remap from="cloud_in" to="/hsrb/head_rgbd_sensor/depth_registered/rectified_points" />
+      <remap from="octomap_full" to="/octomap_full_dynamic"/>
+      <param name="frame_id" type="string" value="/map" />
+      <param name="resolution" value="0.04" /> <!--default: 0.05 [m]-->
+      <param name="base_frame_id" value="base_footprint" />
+      <param name="height_map" value="true" />
+      <param name="sensor_model/max_range" value="7.0" />
+      <param name="sensor_model/hit" value="0.7" />
+      <param name="sensor_model/miss" value="0.4" /> <!--default: 0.4-->
+      <param name="sensor_model/min" value="0.12" />
+      <param name="sensor_model/max" value="0.97" />
+      <param name="latch" value="false" />
+      <param name="filter_ground" value="true" />
+      <param name="ground_filter/distance" value="0.07" />
+      <param name="ground_filter/angle" value="0.02" /> <!--default: 0.15-->
+      <param name="ground_filter/plane_distance" value="0.1" />
+      <param name="pointcloud_min_z" value="0.0" />
+      <param name="pointcloud_max_z" value="2.0" />
+      <param name="occupancy_min_z" value="0.0" />
+      <param name="occupancy_max_z" value="2.0" />
+    </node>
+
+    <group unless="$(arg use_octomap_static)">
+      <!-- Publish to Planning Scene -->
+      <node name="planning_scene_octo_dynamic" pkg="hsr_launch" type="hsr_planningscene_octomap_dynamic.py" output="screen" respawn="true"/>
+    </group>
+
+  </group>
+
+  <!-- <group if="$(arg use_octomap_static)">
+    <group if="$(arg use_octomap_dynamic)">
+      <node name="planning_scene_octo" pkg="hsr_launch" type="hsr_planningscene_octomap_both.py" output="screen" respawn="true"/>
+    </group>
+  </group> -->
+  <group if="$(arg use_rtabmap)">
+    <group if="$(arg pause_rtabmap)">
+      <node pkg="rosservice" type="rosservice" name="rtab_pause" args="call --wait /pause"/>
+    </group>
+  </group>
+
+</launch>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="data_size" default="201" />
+  <arg name="data_len" default="8" />
+  <arg name="max_speed" default="0.5" />
+
+  <node name="em_follow_me_srv"  pkg="em_follow_me" type="em_follow_me_srv.py" output="screen" cwd="node" />
+
+  <node name="em_follow_me_demo" pkg="em_follow_me" type="em_demo.py"         output="screen" cwd="node">
+    <param name="data_size" value="$(arg data_size)" />
+    <param name="data_len" value="$(arg data_len)" />
+    <param name="max_speed" value="$(arg max_speed)" />
+  </node>
+
+</launch>

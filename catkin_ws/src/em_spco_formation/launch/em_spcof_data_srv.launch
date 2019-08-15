@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="trial_name" default="default" />
+  <arg name="ver_isb" default="false" />
+
+  <node name="em_spcof_data"       pkg="em_spco_formation" type="em_spcof_data.py"       output="screen" cwd="node" >
+    <param name="trial_name" value="$(arg trial_name)" />
+    <param name="new_data" value="true" />
+    <param name="ver_isb" value="$(arg ver_isb)" />
+  </node>
+
+  <group unless="$(arg ver_isb)">
+    <node name="em_spcof_data_image" pkg="em_spco_formation" type="em_spcof_data_image.py" output="screen" cwd="node" >
+      <param name="trial_name" value="$(arg trial_name)" />
+    </node>
+  </group>
+
+  <group if="$(arg ver_isb)">
+    <node name="em_spcof_data_yolo" pkg="em_spco_formation" type="em_spcof_data_yolo.py" output="screen" cwd="node" >
+      <param name="trial_name" value="$(arg trial_name)" />
+    </node>
+    <include file="$(find hsr_launch)/launch/darknet_ros_yolov3_default.launch"/>
+    <param name="/darknet_ros/image_view/enable_opencv" value="false" />
+  </group>
+
+  <node name="em_spcof_data_pose"  pkg="em_spco_formation" type="em_spcof_data_pose.py"  output="screen" cwd="node" >
+    <param name="trial_name" value="$(arg trial_name)" />
+  </node>
+
+  <node name="em_spcof_data_word"  pkg="em_spco_formation" type="em_spcof_data_word.py"  output="screen" cwd="node" >
+    <param name="trial_name" value="$(arg trial_name)" />
+  </node>
+  
+</launch>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <include file="$(find as_julius)/launch/as_julius.launch"/>
+
+  <!-- 'en_custom', 'en_default', 'ja_default' -->
+  <param name="as_julius/language" value="en_custom"/>
+</launch>

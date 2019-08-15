@@ -1,0 +1,27 @@
+<robot name="hsr_tissue">
+
+    <link name="hsr_tissue">
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1" />
+            <inertia ixx="0.166667" ixy="0.0" ixz="0.0" iyy="0.166667" iyz="0.0" izz="0.166667"/>
+        </inertial>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://nrp_gazebo_worlds/models/hsr_tissue/meshes/hsr_tissue.dae"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://nrp_gazebo_worlds/models/hsr_tissue/meshes/hsr_tissue.dae"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <gazebo reference="hsr_tissue">
+
+    </gazebo>
+
+</robot>

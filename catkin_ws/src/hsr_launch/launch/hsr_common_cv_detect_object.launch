@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <!-- Change 'args' with single "-" to double "-" when removing HTML comments. -->
+
+  <!-- Faster RCNN:
+  <node name="cv_detect_object_service" pkg="detect_object" type="detect.py" respawn="false" cwd="node" output="screen" args="-detection_service_name cv_detect_object -gpu 0 -model faster-rcnn-vgg16-voc07.npz -label_file faster-rcnn-vgg16-voc07.json"/>
+  -->
+
+  <!-- Faster RCNN WRS:
+  <node name="cv_detect_object_service" pkg="detect_object" type="detect.py" respawn="false" cwd="node" output="screen" args="-detection_service_name cv_detect_object -gpu 0 -model wrs2018_ds3_i10k_model.npz -label_file wrs2018_ds3_i10k_model.json"/>
+  -->
+
+  <!-- YOLOv2 VOC:
+  <node name="cv_detect_object_service" pkg="detect_object" type="detect.py" respawn="false" cwd="node" output="screen" args="-gpu 0 -model yolo-v2-voc0712.npz -label_file yolo-v2-voc0712.json"/>
+  -->
+
+  <!-- YOLOv2 COCO:
+  <node name="cv_detect_object_service" pkg="detect_object" type="detect.py" respawn="false" cwd="node" output="screen" args="-detection_service_name cv_detect_object -gpu 0 -model yolo-v2-coco.npz -label_file coco_valid.json"/>
+  -->
+
+  <!-- YOLOv3 VOC:
+  <node name="cv_detect_object_service" pkg="detect_object" type="detect.py" respawn="false" cwd="node" output="screen" args="-gpu 0 -detection_service_name cv_detect_object -model yolo-v3-voc0712.npz -label_file yolo-v3-voc0712.json"/>
+  -->
+
+  <!-- YOLOv3 COCO: -->
+  <node name="cv_detect_object_service" pkg="detect_object" type="detect.py" respawn="false" cwd="node" output="screen" args="--detection_service_name cv_detect_object --gpu 0 --model yolo-v3-coco.npz --label_file coco_valid.json"/>
+
+  <!-- YOLOv3 SpaCoTy:
+  <node name="cv_detect_object_service" pkg="detect_object" type="detect.py" respawn="false" cwd="node" output="screen" args="-detection_service_name cv_detect_object -gpu 0 -model yolov3-isb-tidy.npz -label_file yolov3-isb-tidy.json"/>
+  -->
+
+  <node name="bounding_box_2d_server" pkg="hsr_common" type="bounding_box_2d_server.py" respawn="false" cwd="node" output="screen" args="--module_name cv_detect_object"/>
+  <node name="bounding_box_2d_input" pkg="topic_tools" type="throttle" respawn="false" cwd="node" output="screen" args="messages /hsrb/head_rgbd_sensor/rgb/image_raw 2 /bounding_box_2d_input_throttle"/>
+
+  <!--
+  <node name="bounding_box_2d_monitor" pkg="hsr_common" type="monitor_and_detect_client.py" respawn="false">
+    <!remap from="input" to="/bounding_box_2d_input_throttle"/>
+    <!remap from="output" to="/bounding_box_2d_monitor"/>
+  </node>
+  -->
+
+  <node name="bounding_box_2d_image_view" pkg="image_view" type="image_view" respawn="false">
+    <remap from="image" to="/bounding_box_2d_monitor"/>
+  </node>
+</launch>

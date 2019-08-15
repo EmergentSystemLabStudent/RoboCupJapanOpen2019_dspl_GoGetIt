@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="spcof_demo">
+
+	<executable package_path="flexbe_behaviors.spcof_demo_sm" class="spcof_demoSM" />
+	<tagstring></tagstring>
+	<author>nakamura</author>
+	<date>Thu Jun 13 2019</date>
+	<description>
+		spcof_demo
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

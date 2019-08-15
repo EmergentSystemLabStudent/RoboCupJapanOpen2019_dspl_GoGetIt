@@ -1,0 +1,4 @@
+string sentence
+int32 count
+---
+bool finish

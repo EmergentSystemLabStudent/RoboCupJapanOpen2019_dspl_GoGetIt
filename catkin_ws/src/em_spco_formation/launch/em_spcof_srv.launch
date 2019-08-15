@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="new_data" default="true" />
+    <include file="$(find em_spco_formation)/launch/em_spcof_data_srv.launch" />
+    <include file="$(find em_spco_formation)/launch/em_spcof_learn_srv.launch" />
+    <include file="$(find em_spco_formation)/launch/em_spcof_name2place_srv.launch" />
+    <include file="$(find em_spco_formation)/launch/em_spcof_place2name_srv.launch" />
+    <param name="/em_spcof_data/new_data" value="$(arg new_data)" />
+</launch>

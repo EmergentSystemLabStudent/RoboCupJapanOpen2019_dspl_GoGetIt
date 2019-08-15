@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="spcof">
+
+	<executable package_path="flexbe_behaviors.spcof_sm" class="spcofSM" />
+	<tagstring>hsr</tagstring>
+	<author>tabuchi</author>
+	<date>Fri Oct 19 2018</date>
+	<description>
+		test
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

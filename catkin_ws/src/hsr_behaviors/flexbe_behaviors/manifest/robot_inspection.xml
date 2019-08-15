@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="Robot_Inspection">
+
+	<executable package_path="flexbe_behaviors.robot_inspection_sm" class="Robot_InspectionSM" />
+	<tagstring></tagstring>
+	<author>Kazuma Furukawa</author>
+	<date>Wed Jul 24 2019</date>
+	<description>
+		Robot_Inspection
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

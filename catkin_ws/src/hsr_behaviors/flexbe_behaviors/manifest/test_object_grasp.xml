@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="Test_object_grasp">
+
+	<executable package_path="flexbe_behaviors.test_object_grasp_sm" class="Test_object_graspSM" />
+	<tagstring></tagstring>
+	<author>Hitoshi Nakamura</author>
+	<date>Wed Aug 07 2019</date>
+	<description>
+		Test_object_grasp
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="Test_behaviors">
+
+	<executable package_path="flexbe_behaviors.test_behaviors_sm" class="Test_behaviorsSM" />
+	<tagstring></tagstring>
+	<author>Hitoshi Nakamura</author>
+	<date>Sun May 12 2019</date>
+	<description>
+		Sample behavior for studying.
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+	<params>
+
+		<param type="numeric" name="wait_time" default="2" label="wait_time" hint="Sets the wait_time">
+			<min value="0" />
+			<max value="5" />
+		</param>
+
+	</params>
+
+
+</behavior>

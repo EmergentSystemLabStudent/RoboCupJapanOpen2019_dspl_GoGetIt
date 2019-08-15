@@ -1,0 +1,4 @@
+string place_name
+---
+geometry_msgs/Pose pose
+bool done

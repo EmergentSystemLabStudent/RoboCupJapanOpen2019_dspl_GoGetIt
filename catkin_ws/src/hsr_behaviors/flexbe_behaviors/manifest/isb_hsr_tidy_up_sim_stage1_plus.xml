@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<behavior name="isb_hsr_tidy_up_sim_stage1_plus">
+
+	<executable package_path="flexbe_behaviors.isb_hsr_tidy_up_sim_stage1_plus_sm" class="isb_hsr_tidy_up_sim_stage1_plusSM" />
+	<tagstring>hsr</tagstring>
+	<author>Shota Isobe</author>
+	<date>Wed Dec 05 2018</date>
+	<description>
+		[Simulator] This state-machine work for tidying up in the room by my master's work .
+	</description>
+
+
+	<!-- Contained Behaviors -->
+
+	<!-- Available Parameters -->
+
+</behavior>
