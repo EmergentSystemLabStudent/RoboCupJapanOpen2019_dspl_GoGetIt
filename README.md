@@ -23,12 +23,12 @@ DoorOpenによって競技がスタートすると，ロボットは環境の地
 1. `roslaunch hsr_launch em_follow_me_default.launch`
 
 2. hsr_launchの以下のlaunchファイルを全て起動する
-*as_julius_default.launch
-*tmc_moveit_default.launch
-*hsr_common_cv_detect_object.launch
-*em_speech_default.launch
-*em_map_record_default.launch
-*em_spco_formation_default.launch
+`as_julius_default.launch`
+`tmc_moveit_default.launch`
+`hsr_common_cv_detect_object.launch`
+`em_speech_default.launch`
+`em_map_record_default.launch`
+`em_spco_formation_default.launch`
 
 3. `roslaunch hsr_launch flexbe_app_default.launch`
 
